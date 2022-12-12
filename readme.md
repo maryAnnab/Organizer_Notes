@@ -1,9 +1,12 @@
-# Zaprojektowanie wstępnego układu aplikacji - layout
+# Application created in PHP 8.1 with database created in MySql 8.0 on Linux Ubuntu 22.04 also supports with Apache2 Server, Project Organaizer_Notes.
+
+## The application is used to organize notes. You can create, store, modify and view your notes with Project Organaizer_Notes.
+
+### Directory structure
 
 * PSR-12 - https://www.php-fig.org/psr/psr-12/
 
-## Struktura katalogów
-
+*
 <pre>
 project_dir
   ├── src
@@ -15,27 +18,6 @@ project_dir
   └ index.php
 </pre>
 
-## Cel
+#### Project in process
 
-Stworzymy szablon html z wydzielonymi miejscami na:
-
-* nagłówek
-* menu
-* kontent strony
-
-Dodamy strony:
-
-* formularz dodawania nowej notatki
-* lista notatek - czyli strona główna
-
-Zlinkujemy strony ze sobą.
-
-## Krok po kroku
-
-1. wyniesienie funkcji debagujących do osobnego pliku
-   * Importowanie plików
-     * include, include_once
-     * require, require_once
-2. połączenie html i php
-3. wyniesienie html do osobnych plików
-4. utworzenie klasy widoku
+This project is still in process so it will be improved over time.
