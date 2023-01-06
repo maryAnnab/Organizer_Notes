@@ -2,12 +2,11 @@
 
  declare(strict_types=1);
 
- namespace App;
+ namespace App\Controller;
 
- require_once("src/Exception/ConfigurationException.php");
- require_once("Database.php");
- require_once("View.php");
-
+ use App\Database;
+ use App\Request;
+ use App\View;
  use App\Exception\ConfigurationException;
 
  abstract class AbstractController
@@ -46,6 +45,23 @@
       $this->$action();
     }
   
+    protected function redirect(string $to, array $params): void
+    {
+      $location = $to;
+
+      if (count($params)) {
+        $queryParams = [];
+        foreach ($params as $key => $value) {
+          $queryParams[] = urlencode($key) . '=' . urlencode($value);
+        }
+        $queryParams = implode('&', $queryParams);
+        $location .= '?' . $queryParams;
+      }
+
+      header("Location: $location");
+      exit;
+    }
+
     private function action(): string
     {
       return $this->request->getParam('action', self::DEFAULT_ACTION);

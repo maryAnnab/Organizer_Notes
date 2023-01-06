@@ -16,6 +16,11 @@ class Request
       $this->post = $post;
     }
 
+    public function isPost(): bool
+    {
+      //request method get
+    }
+
     public function hasPost(): bool
     {
       return !empty($this->post);
