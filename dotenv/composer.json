@@ -1,0 +1,15 @@
+{
+    "name": "anna/dotenv",
+    "autoload": {
+        "psr-4": {
+            "Anna\\Dotenv\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Anna Bielech",
+            "email": "bielechanna@gmail.com"
+        }
+    ],
+    "require": {}
+}
