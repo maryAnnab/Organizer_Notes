@@ -50,7 +50,7 @@ class Database
       $result = $this->conn->query($query);
       return $result->fetchAll(PDO::FETCH_ASSOC);
      } catch (Throwable $e) {
-       throw new StorageException('Failed to fetch note data, 400, $e');
+       throw new StorageException('Failed to fetch note data', 400, $e);
      }
   } 
 
@@ -68,7 +68,43 @@ class Database
 
       $this->conn->exec($query);
     } catch (Throwable $e) {
-      throw new StorageException('Failed to create new note, 400, $e');
+      throw new StorageException('Failed to create new note', 400, $e);
+    }
+  }
+
+  public function editNote(int $id, array $data): void
+  {
+    try {
+      $title = $this->conn->quote($data['title']);
+      $description = $this->conn->quote($data['description']);
+
+      $query = "
+       UPDATE notes
+       SET title = $title, description = $description
+       WHERE id = $id
+      ";
+      
+      $this->conn->exec($query);
+    } catch (Throwable $e) {
+      throw new StorageException('Failed to edit note', 400, $e);
+    }
+  }
+
+  public function deleteNote(int $id): void
+  {
+    try {
+      $title = $this->conn->quote($data['title']);
+      $description = $this->conn->quote($data['description']);
+
+      $query  ="
+       DELETE FROM notes
+       WHERE id = $id
+       LIMIT 1
+      ";
+      
+      $this->conn->exec($query);
+    } catch (Throwable $e) {
+      throw new StorageException('Failed to delete note', 400, $e);
     }
   }
 
