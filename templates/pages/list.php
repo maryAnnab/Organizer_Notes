@@ -45,7 +45,7 @@
           <div>Sort by:</div>
           <label>Title: <input name="sortby" type="radio" value="title" <?php echo $by === 'title' ?
           'checked' : '' ?> /></label>
-          <label>Date: <input type="radio" value="created" <?php echo $by === 'created'  ? 
+          <label>Date: <input name="sortby" type="radio" value="created" <?php echo $by === 'created'  ? 
           'checked' : '' ?> /></label>
         </div>
         <div>

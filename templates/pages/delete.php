@@ -11,7 +11,7 @@
     </ul>
     <form method="POST" action="/?action=delete">
       <input name="id" type="hidden" value="<?php echo $note['id'] ?>" />
-      <input type="sbmit" value="Delete" />
+      <input type="submit" value="Delete" />
     </form>
   <?php else : ?>
     <div>There is no note to display</div>

@@ -8,6 +8,8 @@ use App\Exception\NotFoundException;
 
 class NoteController extends AbstractController
 {   
+    private const PAGE_SIZE = 10;   
+
     public function createAction(): void
     {
       if ($this->request->hasPost()) {
@@ -32,13 +34,20 @@ class NoteController extends AbstractController
 
     public function listAction(): void
     { 
+      $pageNumber = $this->request->getParam('page', 1);
+      $pageSize = $this->request->getParam('page', self::PAGE_SIZE);
       $sortBy = $this->request->getParam('sortby', 'title');
       $sortOrder = $this->request->getParam('sortorder', 'desc');
 
+      if (!in_array($pageSize, [1, 5, 10, 25])) {
+        $pageSize = self::PAGE_SIZE;
+      }
+      
 
       $this->view->render(
         'list',
-        [  
+        [ 
+            'page' => ['number' => $pageNumber, 'size' => $pageSize],
             'sort' => ['by' => $sortBy, 'order' => $sortOrder],
             'notes' => $this->database->getNotes($sortBy, $sortOrder),
             'before' => $this->request->getParam('before'),

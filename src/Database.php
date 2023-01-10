@@ -60,7 +60,7 @@ class Database
         FROM notes
         ORDER BY $sortBy $sortOrder
         ";
-        
+
       $result = $this->conn->query($query);
       return $result->fetchAll(PDO::FETCH_ASSOC);
      } catch (Throwable $e) {
@@ -107,15 +107,7 @@ class Database
   public function deleteNote(int $id): void
   {
     try {
-      $title = $this->conn->quote($data['title']);
-      $description = $this->conn->quote($data['description']);
-
-      $query  ="
-       DELETE FROM notes
-       WHERE id = $id
-       LIMIT 1
-      ";
-      
+      $query = "DELETE FROM notes WHERE id = $id LIMIT 1";
       $this->conn->exec($query);
     } catch (Throwable $e) {
       throw new StorageException('Failed to delete note', 400, $e);
