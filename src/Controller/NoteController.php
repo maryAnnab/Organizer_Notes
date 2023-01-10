@@ -31,13 +31,18 @@ class NoteController extends AbstractController
     }
 
     public function listAction(): void
-    {
+    { 
+      $sortBy = $this->request->getParam('sortby', 'title');
+      $sortOrder = $this->request->getParam('sortorder', 'desc');
+
+
       $this->view->render(
         'list',
-        [
-          'notes' => $this->database->getNotes(),
-          'before' => $this->request->getParam('before'),
-          'error' =>  $this->request->getParam('error')
+        [  
+            'sort' => ['by' => $sortBy, 'order' => $sortOrder],
+            'notes' => $this->database->getNotes($sortBy, $sortOrder),
+            'before' => $this->request->getParam('before'),
+            'error' =>  $this->request->getParam('error')
         ]
       );
     }
@@ -47,7 +52,6 @@ class NoteController extends AbstractController
       
       if ($this->request->isPost()) {
        $noteId = (int) $this->request->postParam('id');
-
        $noteData = [
         'title' => $this->request->postParam('title'),
         'description' => $this->request->postParam('description')
